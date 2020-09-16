@@ -27,8 +27,13 @@ public class MusicStoreController {
  private MusicStoreDAO dao;
  
  @GetMapping("productdata")
-	public @ResponseBody List<Product> productData() {
+	public @ResponseBody List<Product> productsData() {
 		return (List<Product>) dao.getProducts();
+ };
+ 
+ @GetMapping("productdata/{id}")
+	public @ResponseBody Product getProductById(@PathVariable("id") Long productId) {
+		return dao.getProductById(productId);
  };
  
  @GetMapping("/login")
