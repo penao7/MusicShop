@@ -1,5 +1,5 @@
-ALTER TABLE Products DELETE CONSTRAINT FK_BrandProduct FOREIGN KEY (brand_id) REFERENCES Brands(brand_id);
-ALTER TABLE Products DELETE CONSTRAINT FK_CategoryProduct FOREIGN KEY (category_id) REFERENCES Categories(category_id);
+ALTER TABLE Products DROP CONSTRAINT FK_BrandProduct FOREIGN KEY (brand_id) REFERENCES Brands(brand_id);
+ALTER TABLE Products DROP CONSTRAINT FK_CategoryProduct FOREIGN KEY (category_id) REFERENCES Categories(category_id);
 
 DROP TABLE IF EXISTS Brands;
 DROP TABLE IF EXISTS Categories;
