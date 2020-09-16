@@ -74,20 +74,17 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 					<configuration>
+						<source>11</source>
 						<target>11</target>
 						<encoding>UTF-8</encoding>
 						<verbose>true</verbose>
 						<fork>true</fork>
 						<executable>D:\koulu\Java Palvelinohjelmointi\openjdk-11+28_windows-x64_bin\jdk-11\bin\javac.exe</executable>
 					</configuration>
-				</plugin>
+			</plugin>
 		</plugins>
 	</build>
 
