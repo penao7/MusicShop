@@ -1,0 +1,85 @@
+!SESSION 2020-09-10 17:57:27.497 -----------------------------------------------
+eclipse.buildId=4.16.0.I20200604-0540
+java.version=14.0.2
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=fi_FI
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.jface 2 0 2020-09-10 17:58:45.065
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2020-09-10 17:58:45.065
+!MESSAGE A conflict occurred for CTRL+SHIFT+T:
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.jdt.ui.navigate.open.type,Open Type,
+		Open a type in a Java editor,
+		Category(org.eclipse.ui.category.navigate,Navigate,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@7263b0c4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(CTRL+SHIFT+T,
+	ParameterizedCommand(Command(org.eclipse.lsp4e.symbolinworkspace,Go to Symbol in Workspace,
+		,
+		Category(org.eclipse.lsp4e.category,Language Servers,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@361c4981,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY org.eclipse.egit.ui 2 0 2020-09-10 17:58:51.896
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Pena'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.p2.director 2 10054 2020-09-10 17:59:02.711
+!MESSAGE Cannot complete the install because of a conflicting dependency.
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE Software being installed: artificial_root 1.0.0.v1599749942267
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Only one of the following can be installed at once: 
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE XML support using Language Server 0.9.0.202006201747 (org.eclipse.wildwebdeveloper.xml 0.9.0.202006201747)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE XML support using Language Server 0.8.0.202006021616 (org.eclipse.wildwebdeveloper.xml 0.8.0.202006021616)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE From: artificial_root 1.0.0.v1599749942267
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE To: org.eclipse.equinox.p2.iu; org.eclipse.m2e.lemminx.feature.feature.group 0.0.0
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE From: artificial_root 1.0.0.v1599749942267
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE To: org.eclipse.equinox.p2.iu; org.eclipse.wildwebdeveloper.feature.feature.group 0.10.1.202007101231
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE From: POM File editor using Wild Web Developer, Lemminx and Maven LS extension (requires Incubating components) 1.16.0.20200609-1359 (org.eclipse.m2e.editor.lemminx 1.16.0.20200609-1359)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE To: osgi.bundle; org.eclipse.wildwebdeveloper.xml [0.8.0,0.9.0)
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE From: POM Editor using LemMinX language server (includes Incubating components) 1.16.0.20200609-1359 (org.eclipse.m2e.lemminx.feature.feature.group 1.16.0.20200609-1359)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE To: org.eclipse.equinox.p2.iu; org.eclipse.m2e.editor.lemminx [1.16.0.20200609-1359,1.16.0.20200609-1359]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.711
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE From: Wild Web Developer 0.10.1.202007101231 (org.eclipse.wildwebdeveloper.feature.feature.group 0.10.1.202007101231)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.711
+!MESSAGE To: org.eclipse.equinox.p2.iu; org.eclipse.wildwebdeveloper.xml.feature.feature.group [0.10.1.202006201747,0.10.1.202006201747]
+!SUBENTRY 1 org.eclipse.equinox.p2.director 4 1 2020-09-10 17:59:02.712
+!MESSAGE Cannot satisfy dependency:
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.712
+!MESSAGE From: Wild Web Developer XML tools 0.10.1.202006201747 (org.eclipse.wildwebdeveloper.xml.feature.feature.group 0.10.1.202006201747)
+!SUBENTRY 2 org.eclipse.equinox.p2.director 4 0 2020-09-10 17:59:02.712
+!MESSAGE To: org.eclipse.equinox.p2.iu; org.eclipse.wildwebdeveloper.xml [0.9.0.202006201747,0.9.0.202006201747]
+
+!ENTRY org.eclipse.oomph.setup.ui 1 0 2020-09-10 17:59:02.713
+!MESSAGE Setup tasks were performed during startup.See 'D:\koulu\Java Palvelinohjelmointi\eclipse\configuration\org.eclipse.oomph.setup\setup.log' for details

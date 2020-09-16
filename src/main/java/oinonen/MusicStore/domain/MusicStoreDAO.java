@@ -1,0 +1,29 @@
+package oinonen.MusicStore.domain;
+
+import java.util.List;
+
+public interface MusicStoreDAO {
+ 
+ public List<Product> getProducts();
+ 
+ public boolean deleteProduct(Long id);
+ 
+ public Product getProductById(Long id);
+ 
+ public boolean updateProduct(Long id, Product product);
+ 
+ public List<Category> getCategories();
+ 
+ public List<Brand> getBrands();
+ 
+ public Brand getBrandByName(String brand);
+ 
+ public Category getCategoryByName(String category);
+ 
+ public boolean addProduct(Product product);
+ 
+ public boolean handleOrder(Long id, int quantity);
+ 
+ public int getCountOfProducts();
+
+}

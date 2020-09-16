@@ -1,0 +1,87 @@
+body {
+	padding-top: 56px;
+	background-color: #edefef;
+	overflow: hidden;
+	overflow-y: scroll; 
+}
+
+.indexText {
+	font-size: 70px;	
+}
+
+.orderButton {
+	background-color: #ff8040;
+	color: black;
+}
+
+.orderButton:hover {
+	background-color: red;
+}
+
+.valueText {
+	color: black;
+	background-color: #ff8040;	
+}
+
+.modal-open .modal {
+    overflow-y: inherit;
+}
+
+.modal-open .topnavbar-wrapper {
+	overflow-y: inherit;
+    padding-right:17px; /* Noticed that right aligned navbar content got overlapped by the .modal scrollbar */
+}
+
+th {
+	color: #ff8040;
+}
+
+#total {
+	color: #ff8040;
+}
+
+.content {
+	height: 700px;
+}
+
+.breadcrumb {
+	background-color: #edefef;
+}
+
+h1, h5 {
+	color: #ff8000;	
+}
+
+.jumbotron {
+	color: orange;
+	background-image: url("/products/images/jumbo.jpg");
+	background-size: cover;
+	opacity: 0.8;
+	text-align: center;
+	position: relative;
+}
+
+.jumbotron h1 {
+
+font-weight: 400;
+text-shadow: 5px 5px 0px red, 3px 6px 0px red;
+}
+
+.jumbotron p {
+
+font-weight: 100;
+text-shadow: 5px 5px 0px red, 3px 6px 0px red;
+}
+
+.navbar {  
+    background-color: orange; /*whichever you want*/
+    opacity: 0.8;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: red;
+}

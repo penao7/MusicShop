@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html 
+	xmlns="http://www.thymeleaf.org"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>	
+	<head>
+		<link 
+			rel="stylesheet" 
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+			crossorigin="anonymous"
+		>
+		<link th:href="@{/styles/main.css}" rel="stylesheet" />
+		<title>Music Store</title>
+		<meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preload" href="/products/images/jumbo.jpg" as="image">
+	</head>
+	<body>
+		<div th:replace="fragments/navbar :: navbar"/>
+		<div th:replace="fragments/navbar :: jumbotron"/>
+	    <div class="container content">
+	    	<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/products">Products</a></li>
+					<li th:text="Cart" class="breadcrumb-item active" aria-current="page"></li>
+				</ol>
+			</nav>
+			<div class="alert alert-dismissable alert-success" role="alert" th:if="${success}">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p th:text="${success}">Test</p>
+			</div>
+			<div class="alert alert-dismissable alert-danger" role="alert" th:text="${error}" th:if="${error}">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p th:text="${success}">Test</p>
+			</div>
+			<div class="row">
+		    	<div class="col-12 col-md-6 offset-md-3">
+					<h1 th:text="'CART'"/>
+					<form>
+						<div class="form-group">
+							<p th:if="${session.cart == null || #lists.isEmpty(session.cart)}" th:text="'Cart is empty'"></p>
+							<div th:if="${session.cart ne null && #lists.size(session.cart) > 0}">
+								<ul class="list-group" th:each="cart : ${session.cart}">							
+									<li class="list-group-item">
+										<a type="button" th:href="@{/remove/{productId}(productId=${cart.id})}" class="close" aria-hidden="true">&times;</a>
+										<div class="row">
+											<div class="col-12 col-md-10">
+												<h6 class="mb-1" th:text="${cart.brand} + ' ' + ${cart.name}"></h6>
+												<p class="mb-1" th:text="${cart.category}"/>
+											</div>
+											<div class="col-12 col-md-2 text-right">
+												<span class="valueText badge badge-dark badge-pill" th:text="${cart.cart}"></span>
+												<p class="mb-1" th:text="${cart.list_price} * ${cart.cart} + ' &euro;'"/>
+											</div>	
+										</div>
+									</li>
+								</ul>
+								<ul class="list-group">
+									<li class="list-group-item font-weight-bold d-flex justify-content-end">
+										<p class="mb-1 display-4" id="total"></p>
+									</li>	
+								</ul>
+								<a type="button" th:href="@{/order}" class="orderButton btn float-right mt-2">Order!</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+  	  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script th:inline="javascript">
+
+	let total = 0;
+
+	const calculateTotal = () => {
+		const cart = /*[[${session.cart}]]*/ null;
+		cart.map(cart => {
+			total = total + (cart.cart * cart.list_price);
+		});
+		document.getElementById("total").innerHTML = total + " &euro;";
+	};
+
+	calculateTotal();
+
+/* 		$(document).on("click", "#deleteProd", function () {
+		$('.modal-body').removeClass('modal-open');
+	     var id = $(this).data('id');
+		var product = $(this).data('product');
+
+	     $(".modal-body #input").text(`Are you sure you want to delete ${product}?`);
+	     $(".modal-footer #delete").attr('href', `delProd/${id}`);
+	});
+	 */
+	
+</script>
+</html>
