@@ -32,7 +32,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      http
      	.authorizeRequests()
      	.requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-     		.antMatchers("/", "/products", "/products/**", "/styles/**", "/images", "/buy/**", "/cart/", "/cart/**", "/remove/", "/remove/**", "/order/**", "/productdata/", "/productdata/**").permitAll()
+     		.antMatchers("/", 
+     			"/products", 
+     			"/products/**", 
+     			"/styles/**", 
+     			"/images", 
+     			"/buy/**", 
+     			"/cart/", 
+     			"/cart/**", 
+     			"/remove/", 
+     			"/remove/**",
+     			"/order",
+     			"/order/**", 
+     			"/productdata/", 
+     			"/productdata/**"
+     			).permitAll()
      		.anyRequest().authenticated()
         .and()
       .formLogin()

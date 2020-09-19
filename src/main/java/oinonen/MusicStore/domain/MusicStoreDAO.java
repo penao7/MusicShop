@@ -1,5 +1,6 @@
 package oinonen.MusicStore.domain;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface MusicStoreDAO {
@@ -25,5 +26,13 @@ public interface MusicStoreDAO {
  public boolean handleOrder(Long id, int quantity);
  
  public int getCountOfProducts();
+ 
+ public boolean createCustomer(Customer customer);
+ 
+ public Long getCustomerIdByName(String firstName, String lastName);
+ 
+ public Long createOrderAndGetId(Long customerId) throws SQLException;
+ 
+ public boolean addProductToOrder(Long orderId, Product product);
 
 }

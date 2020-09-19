@@ -1,7 +1,10 @@
 package oinonen.MusicStore.domain;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -15,12 +18,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MusicStoreDAOimpl implements MusicStoreDAO {
  
+private static final String SQL_INSERT = null;
 RowMapper<Product> pMapper = new ProductRowMapper();
 RowMapper<Brand> bMapper = new BrandRowMapper();
 RowMapper<Category> cMapper = new CategoryRowMapper();
+RowMapper<Customer> customerMapper = new CustomerRowMapper();
  
  	@Autowired
  	private JdbcTemplate jdbcTemplate;
+ 	private DataSource dataSource;
  
  	public JdbcTemplate getJdbcTemplate() {
  	 	return jdbcTemplate;
@@ -257,7 +263,117 @@ RowMapper<Category> cMapper = new CategoryRowMapper();
  public int getCountOfProducts() {
 	String sql = "SELECT COUNT(*) FROM Products";
 	return jdbcTemplate.queryForObject(sql, Integer.class);
+ }
+
+
+ @Override
+ public boolean createCustomer(Customer customer) {
+	String sql = "INSERT INTO Customers (customer_id, first_name, last_name, street, city, post_code) VALUES "
+		+ "(customer_id, ?, ?, ?, ?, ?)";
+	
+	Object[] args = new Object[] {
+		customer.getFirst_name(),
+		customer.getLast_name(),
+		customer.getStreet(),
+		customer.getCity(),
+		customer.getPost_code()
+	};
+	
+	try {
+	 int rows = jdbcTemplate.update(sql, args);
+	 
+	 if(rows > 0) {
+		return true;
+	 }
+	 
+	} catch(DataAccessException exception) {
+	 	throw exception;
+	}
+	
+	return false;
 	
  };
+	
+
+ @Override
+ public Long getCustomerIdByName(String firstName, String lastName) {
+	String sql = "SELECT * FROM Customers c WHERE c.first_name = ? AND c.last_name = ?";
+	
+	
+	Object [] args = new Object[] {
+		firstName,
+		lastName
+	};
+	
+	try {
+	 Customer customer = jdbcTemplate.queryForObject(sql, args, customerMapper);
+	
+		return customer.getId();
+		
+	} catch (DataAccessException exception) {
+	 	throw exception;
+	}
+ };
+
+ @Override
+ public Long createOrderAndGetId (Long customerId) throws SQLException {
+	
+	String sql = "INSERT INTO Orders(order_id, customer_id, order_date) VALUES(order_id, ?, now())";
+	
+	try (
+	Connection connection = jdbcTemplate.getDataSource().getConnection();
+		
+       PreparedStatement statement = connection.prepareStatement(sql,
+                                     Statement.RETURN_GENERATED_KEYS);
+   ) {
+	 
+	 			statement.setLong(1, customerId);
+       int affectedRows = statement.executeUpdate();
+      
+
+       if (affectedRows == 0) {
+           throw new SQLException("Creating user failed, no rows affected.");
+       }
+
+       try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+           if (generatedKeys.next()) {
+               return generatedKeys.getLong(1);
+           }
+           else {
+               throw new SQLException("Creating user failed, no ID obtained.");
+           }
+       } catch (DataAccessException exception) {
+      		throw exception;
+       }
+   } catch (DataAccessException exception) {
+  	throw exception;
+   }
+ };
+
+ @Override
+ public boolean addProductToOrder(Long orderId, Product product) {
+	
+	String sql = "INSERT INTO Order_items(order_id, product_id, quantity, list_price) VALUES(?, ?, ?, ?)";
+	 
+	try {
+	 
+		Object [] args = new Object[] {
+			orderId,
+			product.getId(),
+			product.getCart(),
+			product.getList_price()
+		};
+		
+	 int rows = jdbcTemplate.update(sql, args);
+	 if(rows > 0) {
+		return true;
+	 }
+	} catch (DataAccessException exception) {
+	 throw exception;
+	}
+	
+	return false;
+	
+ }
 };
 

@@ -1,16 +1,22 @@
 package oinonen.MusicStore.web;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import oinonen.MusicStore.domain.Customer;
 import oinonen.MusicStore.domain.MusicStoreDAOimpl;
 import oinonen.MusicStore.domain.Product;
 
@@ -62,18 +68,37 @@ public class CartController {
   	 	return "redirect:/cart";
 	};
 	
-	@GetMapping("order")
-		public String order(HttpSession session, RedirectAttributes redirAttrs) {
-	 
-	 	@SuppressWarnings("unchecked")
-		List<Product> cart = (List<Product>) session.getAttribute("cart");
-	 	
-	 	cart.forEach(product -> {
-	 	 dao.handleOrder(product.getId(), product.getCart());
-	 	});
-	 	
-	 	session.removeAttribute("cart");
-	 	redirAttrs.addFlashAttribute("success", "Thank you for you order!");
+  @GetMapping("order")
+	public String customerDetails(Model model) {
+   
+   model.addAttribute("customer", new Customer());
+ 	 return "order";
+	};
+		
+	@PostMapping("order")
+		public String order(
+			@Valid Customer customer, 
+			BindingResult bindingResult, 
+			HttpSession session, 
+			RedirectAttributes redirAttrs
+		) throws SQLException {
+	 	 
+	 	dao.createCustomer(customer);
+	 	Long customerId = dao.getCustomerIdByName(customer.getFirst_name(), customer.getLast_name());
+	 	Long orderId = dao.createOrderAndGetId(customerId);
+
+ 	 	@SuppressWarnings("unchecked")
+ 		List<Product> cart = (List<Product>) session.getAttribute("cart");
+  	
+  	cart.forEach(product -> {
+  	 dao.handleOrder(product.getId(), product.getCart());
+ 	 	 dao.addProductToOrder(orderId, product);
+  	 
+ 	 	});
+ 	 	
+ 	 	session.removeAttribute("cart");
+ 	 	redirAttrs.addFlashAttribute("success", "Thank you for you order!");
+
 	 	return "redirect:/cart";
 	};
 
