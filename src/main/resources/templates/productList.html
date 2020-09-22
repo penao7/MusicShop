@@ -68,6 +68,7 @@
 											<div class="col-12 col-md-5">
 												<b><h4 th:text="${product.list_price + '&euro;'}"/></b>
 													<a 
+														sec:authorize="isAuthenticated()"
 														type="button" class="btn btn-dark btn-sm" 
 														th:href="@{/buy/{productId}(productId=${product.id})}"
 													>
