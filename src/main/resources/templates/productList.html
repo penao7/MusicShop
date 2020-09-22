@@ -28,11 +28,11 @@
 			</nav>
 			<div class="alert alert-dismissable alert-success" role="alert" th:if="${success}">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<p th:text="${success}">Test</p>
+				<p th:text="${success}"/>
 			</div>
 			<div class="alert alert-dismissable alert-danger" role="alert" th:text="${error}" th:if="${error}">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<p th:text="${success}">Test</p>
+				<p th:text="${success}"/>
 			</div>
 
 			<div class="row">
@@ -71,7 +71,7 @@
 														type="button" class="btn btn-dark btn-sm" 
 														th:href="@{/buy/{productId}(productId=${product.id})}"
 													>
-														Add cart
+														Add to cart
 													</a>
 											</div>
 										</div>

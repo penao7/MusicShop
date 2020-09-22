@@ -13,18 +13,18 @@ DROP TABLE IF EXISTS Orders;
 DROP TABLE IF EXISTS Order_items;
 
 CREATE TABLE IF NOT EXISTS Users (
-  user_id INTEGER NOT NULL AUTO_INCREMENT,
-  username varchar(45) NOT NULL,
+  user_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username varchar(45) NOT NULL UNIQUE,
   password varchar(64) NOT NULL,
   role varchar(45) NOT NULL,
-  enabled tinyint(4) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
+  enabled tinyint(4) DEFAULT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Customers (
   customer_id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
   last_name VARCHAR(50) NOT NULL,
+  user_id INTEGER NOT NULL,
   street VARCHAR(100) NOT NULL,
   city VARCHAR(50) NOT NULL,
   post_code INTEGER (5) NOT NULL
@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS Products (
 	imgUrl varchar(255)
 );
 
+ALTER TABLE Customers ADD CONSTRAINT FK_UserCustomer FOREIGN KEY (user_id) REFERENCES Users(user_id);
 ALTER TABLE Orders ADD CONSTRAINT FK_CustomerOrder FOREIGN KEY (customer_id) REFERENCES Customers(customer_id);
 ALTER TABLE Order_items ADD CONSTRAINT FK_ProductOrder FOREIGN KEY (order_id) REFERENCES Orders(order_id);
 ALTER TABLE Order_items ADD CONSTRAINT FK_ProductItem FOREIGN KEY (product_id) REFERENCES Products(product_id);

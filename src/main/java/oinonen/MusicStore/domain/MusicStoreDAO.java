@@ -34,5 +34,11 @@ public interface MusicStoreDAO {
  public Long createOrderAndGetId(Long customerId) throws SQLException;
  
  public boolean addProductToOrder(Long orderId, Product product);
+ 
+ public Customer getCustomerByUserName(String username);
+ 
+ public List<Order> getOrdersByCustomerId(Long id);
+ 
+ public Order getOrderById(Long id);
 
 }

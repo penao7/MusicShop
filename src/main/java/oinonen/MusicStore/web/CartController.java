@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,9 +70,17 @@ public class CartController {
 	};
 	
   @GetMapping("order")
-	public String customerDetails(Model model) {
+	public String customerDetails(Model model, HttpSession session, Authentication authentication) {
    
-   model.addAttribute("customer", new Customer());
+   List<Product> cart = (List<Product>) session.getAttribute("cart");
+   
+   if(cart == null || cart.size() == 0) {
+  		return "redirect:/cart";
+   };
+   
+   Customer customer = dao.getCustomerByUserName(authentication.getName());
+   
+   model.addAttribute("customer", customer);
  	 return "order";
 	};
 		
@@ -80,12 +89,12 @@ public class CartController {
 			@Valid Customer customer, 
 			BindingResult bindingResult, 
 			HttpSession session, 
-			RedirectAttributes redirAttrs
+			RedirectAttributes redirAttrs,
+			Authentication authentication
 		) throws SQLException {
 	 	 
-	 	dao.createCustomer(customer);
-	 	Long customerId = dao.getCustomerIdByName(customer.getFirst_name(), customer.getLast_name());
-	 	Long orderId = dao.createOrderAndGetId(customerId);
+	 	Customer returnedCustomer = dao.getCustomerByUserName(authentication.getName());
+	 	Long orderId = dao.createOrderAndGetId(returnedCustomer.getId());
 
  	 	@SuppressWarnings("unchecked")
  		List<Product> cart = (List<Product>) session.getAttribute("cart");
@@ -93,13 +102,20 @@ public class CartController {
   	cart.forEach(product -> {
   	 dao.handleOrder(product.getId(), product.getCart());
  	 	 dao.addProductToOrder(orderId, product);
-  	 
  	 	});
  	 	
  	 	session.removeAttribute("cart");
  	 	redirAttrs.addFlashAttribute("success", "Thank you for you order!");
 
 	 	return "redirect:/cart";
+	};
+	
+  @GetMapping("order/{orderId}")
+	public String orderDetails(Model model) {
+   
+   
+   
+ 	 return "order/{orderId}";
 	};
 
 	private int exists(Long id, List<Product> cart) {

@@ -22,7 +22,8 @@ private static final String SQL_INSERT = null;
 RowMapper<Product> pMapper = new ProductRowMapper();
 RowMapper<Brand> bMapper = new BrandRowMapper();
 RowMapper<Category> cMapper = new CategoryRowMapper();
-RowMapper<Customer> customerMapper = new CustomerRowMapper();
+RowMapper<Customer> customerRowMapper = new CustomerRowMapper();
+RowMapper<Order> orderRowMapper = new OrderRowMapper();
  
  	@Autowired
  	private JdbcTemplate jdbcTemplate;
@@ -76,9 +77,7 @@ RowMapper<Customer> customerMapper = new CustomerRowMapper();
 
  @Override
  public Product getProductById(Long id) {
-	
-		Product product = null;
-		
+			
 		String sql = "SELECT product_id, b.brand_id, c.category_id, quantity, product_name, model_year, list_price, brand_name, category_name , imgUrl FROM Products p "
 			+ "JOIN Brands b ON p.brand_id = b.brand_id "
 			+ "JOIN Categories c ON p.category_id = c.category_id "
@@ -87,7 +86,7 @@ RowMapper<Customer> customerMapper = new CustomerRowMapper();
 			Object [] args = new Object[] { id };		
 		
 			try {
-				product = jdbcTemplate.queryForObject(sql, args, pMapper);
+				Product product = jdbcTemplate.queryForObject(sql, args, pMapper);
 				
 				System.out.println("Product " + product.getName() + " found from database");
 				
@@ -306,7 +305,7 @@ RowMapper<Customer> customerMapper = new CustomerRowMapper();
 	};
 	
 	try {
-	 Customer customer = jdbcTemplate.queryForObject(sql, args, customerMapper);
+	 Customer customer = jdbcTemplate.queryForObject(sql, args, customerRowMapper);
 	
 		return customer.getId();
 		
@@ -374,6 +373,59 @@ RowMapper<Customer> customerMapper = new CustomerRowMapper();
 	
 	return false;
 	
+ }
+
+ @Override
+ public Customer getCustomerByUserName(String username) {
+	String sql = "SELECT * from Customers c JOIN Users u ON c.user_id = u.user_id WHERE username = ?";
+	
+	Object[] args = new Object[] { username };
+	
+	try {
+	 Customer customer = jdbcTemplate.queryForObject(sql, args, customerRowMapper);
+	 return customer;
+	}
+	catch (DataAccessException exception) {
+	 throw exception;
+	}
+ }
+
+ @Override
+ public List<Order> getOrdersByCustomerId(Long id) {
+	String sql = "SELECT o.order_id, SUM(oi.list_price) 'total_price', o.order_date as 'order_date' FROM Orders o "
+		+ "JOIN Order_items oi ON o.order_id = oi.order_id "
+		+ "JOIN Products p ON p.product_id = oi.product_id "
+		+ "JOIN Customers c ON c.customer_id = o.customer_id "
+		+ "WHERE o.customer_id = ? "
+		+ "GROUP BY o.order_id;";
+	
+	Object [] args = new Object[] { id };
+	
+	try {
+		List<Order> orders = jdbcTemplate.query(sql, args, orderRowMapper);
+		return orders;
+	} catch (DataAccessException exception) {
+	 	throw exception;
+	}
+	
+ }
+
+ @Override
+ public Order getOrderById(Long id) {
+	Order order = null;
+	
+	String sql = "SELECT order_id, b.brand_id, c.category_id, quantity, product_name, model_year, list_price, brand_name, category_name , imgUrl FROM Products p "
+		+ "JOIN Brands b ON p.brand_id = b.brand_id "
+		+ "JOIN Categories c ON p.category_id = c.category_id "
+		+ "WHERE product_id = ?";
+	
+		Object [] args = new Object[] { id };		
+	
+		try {
+		 return order;
+		} catch (DataAccessException exception) {
+		 	throw exception;
+		}
  }
 };
 

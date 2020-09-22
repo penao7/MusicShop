@@ -15,7 +15,7 @@ public class Customer {
 	super();
 	this.id = (long) 0;
 	this.first_name = first_name;
-	this.last_name = last_name;
+	this.last_name = last_name;	
 	this.street = street;
 	this.city = city;
 	this.post_code = post_code;

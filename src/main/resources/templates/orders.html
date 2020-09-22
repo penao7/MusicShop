@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html 
+	xmlns="http://www.thymeleaf.org"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>	
+	<head>
+		<link 
+			rel="stylesheet" 
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
+			integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" 
+			crossorigin="anonymous"
+		>
+		<link th:href="@{/styles/main.css}" rel="stylesheet" />
+		<title>Music Store</title>
+		<meta http-equiv="Content-Type" content="text/html charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="preload" href="/products/images/jumbo.jpg" as="image">
+	</head>
+	<body>
+		<div th:replace="fragments/navbar :: navbar"/>
+		<div th:replace="fragments/navbar :: jumbotron"/>
+	    <div class="container content">
+	    	<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="/products">Orders</a></li>
+				</ol>
+			</nav>
+			<div class="alert alert-dismissable alert-success" role="alert" th:if="${success}">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p th:text="${success}">Test</p>
+			</div>
+			<div class="alert alert-dismissable alert-danger" role="alert" th:text="${error}" th:if="${error}">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<p th:text="${success}">Test</p>
+			</div>
+			<div class="row">
+		    	<div class="col-12 col-md-7 offset-md-2">
+					<h1 class="mb-5" th:text="'Orders'"/>
+					<p th:if="${orders == null || #lists.isEmpty(orders)}" th:text="'No orders'"></p>
+					<form>
+						<div th:if="${orders ne null && #lists.size(orders) > 0}">
+								<ul class="list-group" th:each="order : ${orders}">							
+									<li class="list-group-item">
+										<div class="row">
+											<div class="col-12 col-md-9">
+												<b><p th:text="'Order date:'"/></b>
+												<p class="mb-1" id="orderTotal" th:text="${order.getDate()}"/>
+											</div>
+											<div class="col-12 col-md-3 text-right">
+												<b><p th:text="'Total price:'"/></b>
+												<p class="mb-1 orderTotal ml-1" th:text="${order.total_price} + ' &euro;'"/>
+											</div>	
+										</div>
+									</li>
+								</ul>
+						</div>
+					</form>
+				</div>
+			</div>
+  	  </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script th:inline="javascript">
+
+</script>
+</html>

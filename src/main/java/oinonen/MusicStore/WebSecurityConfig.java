@@ -38,8 +38,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      			"/styles/**", 
      			"/images", 
      			"/buy/**", 
-     			"/cart/", 
-     			"/cart/**", 
      			"/remove/", 
      			"/remove/**",
      			"/order",

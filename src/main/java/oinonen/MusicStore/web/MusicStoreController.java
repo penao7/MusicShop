@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,7 +18,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import oinonen.MusicStore.domain.Brand;
 import oinonen.MusicStore.domain.Category;
+import oinonen.MusicStore.domain.Customer;
 import oinonen.MusicStore.domain.MusicStoreDAO;
+import oinonen.MusicStore.domain.Order;
 import oinonen.MusicStore.domain.Product;
 
 @Controller
@@ -130,7 +133,6 @@ public class MusicStoreController {
    
    redirAttrs.addFlashAttribute("success", "Edited successfully product " + product.getBrand() + ' ' + product.getName());
    return "redirect:/products";
-
 };
 
 @GetMapping("addProduct")
@@ -167,7 +169,20 @@ public String postProduct(
     
     redirAttrs.addFlashAttribute("success", "Successfully added product " + product.getBrand() + ' ' + product.getName());
     return "redirect:/products";
-	};
+};
+
+@GetMapping("orders")
+public String getProducts(Model model, Authentication authentication) {
+  
+ Customer customer = dao.getCustomerByUserName(authentication.getName());
+ List<Order> orders = dao.getOrdersByCustomerId(customer.getId());
+ 
+ model.addAttribute("orders", orders);
+  
+ return "orders";
+}
+	
+	
 	
 };
 

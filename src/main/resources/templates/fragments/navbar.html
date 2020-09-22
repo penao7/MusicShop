@@ -11,13 +11,14 @@
 					<div class="navbar-nav mr-auto">
 						<a class="nav-link active" href="/">Home</a>
 						<a class="nav-link active" href="/products">Products</a>
+						<a sec:authorize="isAuthenticated()" class="nav-link" href="/orders" th:href="@{/orders}">Orders</a>
 						<a sec:authorize="hasRole('ADMIN')" class="nav-link active" href="/addProduct">Add Product</a>
 					</div>
-					<span sec:authorize="hasRole('ADMIN')" class="navbar-text" th:text="'Logged in as ' + ${#authentication.name}"/>
+					<span sec:authorize="isAuthenticated()" class="navbar-text mr-3" th:text="'Logged in as ' + ${#authentication.name}"/>
 					<div class="navbar-nav">
-						<a class="nav-link mr-sm-2" href="/cart">Cart</a>  
+						<a sec:authorize="isAuthenticated()" class="nav-link mr-sm-2" href="/cart">Cart</a>  
 						<a sec:authorize="!isAuthenticated()" class="nav-link mr-sm-2" href="/login">Login</a>  
-			    		<a sec:authorize="hasRole('ADMIN')" class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Logout</a>
+			    		<a sec:authorize="isAuthenticated()" class="nav-link" href="/logout" th:href="@{#}" onclick="$('#form').submit();">Logout</a>
 			    		<form style="visibility: hidden" id="form" method="post" action="#" th:action="@{/logout}"></form>
 					</div>
 					</div>

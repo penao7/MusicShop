@@ -9,6 +9,12 @@ body {
 	font-size: 70px;	
 }
 
+.orderTotal {
+	color: #ff8040;
+	font-size: 20px;
+	font-weight: 700;
+}
+
 .orderButton {
 	background-color: #ff8040;
 	color: black;

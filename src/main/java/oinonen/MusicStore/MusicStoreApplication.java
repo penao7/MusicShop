@@ -28,8 +28,14 @@ public class MusicStoreApplication implements CommandLineRunner {
 	 jdbcTemplate.execute("INSERT INTO Users "
 	 	+ "(username, password, role, enabled) VALUES "
 	 	+ "('admin', '$2a$10$zxvEq8XzYEYtNjbkRsJEbukHeRx3XS6MDXHMu8cNuNsRfZJWwswDy', 'ROLE_ADMIN', 1), "
-	 	+ "('pena', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu','ROLE_USER', 1);"
+	 	+ "('jukkis', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu','ROLE_USER', 1);"
 	 	);
+	 
+	 jdbcTemplate.execute("INSERT INTO Customers "
+	 	+ "(customer_id, first_name, last_name, user_id, street, city, post_code) VALUES "
+	 	+ "(customer_id, 'Jukka', 'Laakso', 2, 'Vaahteratie 4', 'Jyväskylä', 40320), "
+	 	+ "(customer_id, 'Testi', 'Testaaja', 1, 'Testintie 23', 'Testinkylä', 62626);"
+	 	);	 
 	 
 	 jdbcTemplate.execute("INSERT INTO Brands " +
 	 "(brand_id, brand_name) VALUES " +
