@@ -177,6 +177,8 @@ public String getProducts(Model model, Authentication authentication) {
  Customer customer = dao.getCustomerByUserName(authentication.getName());
  List<Order> orders = dao.getOrdersByCustomerId(customer.getId());
  
+ 
+ 
  model.addAttribute("orders", orders);
   
  return "orders";

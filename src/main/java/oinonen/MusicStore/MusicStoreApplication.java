@@ -27,14 +27,14 @@ public class MusicStoreApplication implements CommandLineRunner {
 	 
 	 jdbcTemplate.execute("INSERT INTO Users "
 	 	+ "(username, password, role, enabled) VALUES "
-	 	+ "('admin', '$2a$10$zxvEq8XzYEYtNjbkRsJEbukHeRx3XS6MDXHMu8cNuNsRfZJWwswDy', 'ROLE_ADMIN', 1), "
-	 	+ "('jukkis', '$2a$10$XptfskLsT1l/bRTLRiiCgejHqOpgXFreUnNUa35gJdCr2v2QbVFzu','ROLE_USER', 1);"
+	 	+ "('admin', '$2y$12$0e9HDxRl5W9gI/fNmEFSnepBU.56yqM4pBhJhfoSIfVZXxzat30wi', 'ROLE_ADMIN', 1), "
+	 	+ "('user', '$2y$12$J9gP0IFKgY8PJA3aGqaNHuwB7K8cwabjf791q6z.k/Tl1BVSKy3Au', 'ROLE_USER', 1);"
 	 	);
 	 
 	 jdbcTemplate.execute("INSERT INTO Customers "
 	 	+ "(customer_id, first_name, last_name, user_id, street, city, post_code) VALUES "
-	 	+ "(customer_id, 'Jukka', 'Laakso', 2, 'Vaahteratie 4', 'Jyväskylä', 40320), "
-	 	+ "(customer_id, 'Testi', 'Testaaja', 1, 'Testintie 23', 'Testinkylä', 62626);"
+	 	+ "(customer_id, 'Admin', 'Test', 1, 'TestAddress', 'Example', 00000), "
+	 	+ "(customer_id, 'User', 'Test', 2, 'Testroad 23', 'Testvillage', 62626);"
 	 	);	 
 	 
 	 jdbcTemplate.execute("INSERT INTO Brands " +

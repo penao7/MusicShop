@@ -3,3 +3,10 @@ ALTER TABLE Products DROP FOREIGN KEY FK_BrandProduct;
 ALTER TABLE Products DROP FOREIGN KEY FK_CategoryProduct;
 ALTER TABLE Order_items DROP FOREIGN KEY FK_ProductItem;
 ALTER TABLE Orders DROP FOREIGN KEY FK_CustomerOrder;
+
+ALTER TABLE Order_items DROP FOREIGN KEY FK_ProductOrder;
+ALTER TABLE Products DROP FOREIGN KEY FK_BrandProduct;
+ALTER TABLE Products DROP FOREIGN KEY FK_CategoryProduct;
+ALTER TABLE Order_items DROP FOREIGN KEY FK_ProductItem;
+ALTER TABLE Orders DROP FOREIGN KEY FK_CustomerOrder;
+
