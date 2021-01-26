@@ -32,7 +32,7 @@ and the app will be up in running in http://localhost:8080 by default.
 
 Upon starting the database structure is initialized using initial [schema](/src/main/resources/schema.sql) and populated with data by using [commandlinerunner](src/main/java/oinonen/MusicStore/MusicStoreApplication.java).
 
-There are initially two user created for testing:
+There are initially two user's created for testing:
 
 | username | password                          |
 |----------|-----------------------------------|
