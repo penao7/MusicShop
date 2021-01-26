@@ -1,6 +1,6 @@
 services:
   web:
-    image: musicstore
+    image: penao7/musicstore
     depends_on:
       - db
     restart: always
