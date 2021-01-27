@@ -1,6 +1,6 @@
 # Music Shop
 
-This is a Java Spring Boot project made for Server Programming Course. 
+This is a Java Spring Boot project made for Server Programming Course. Client side for the app is implemented using [Thymeleaf](https://www.thymeleaf.org/).
 
 ## Features
 
